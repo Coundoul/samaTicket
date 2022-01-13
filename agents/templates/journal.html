@@ -1,0 +1,252 @@
+{% extends "layout/index.html" %}
+{% load static %}
+{% load bootstrap5 %}
+{% load bootstrap_icons %}
+
+{% block content %}
+<p>
+
+<section>
+		<div class="container">
+			<div class="row">
+				<br>
+				<div class="col-md-4">
+					<form action="rechercher" method="POST" class="std" style="width:100%;">
+						{% csrf_token %}
+						<div class="search-box">
+							<div class="input-group">
+
+									<input placeholder="Rechercher par mail" required="required" type="email" name="emailagent" id="emailagent" class="form-control">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="submit"></button>
+									</span>
+
+							</div><!-- /.input-group -->
+						</div><!-- /.search-box -->
+					</form>
+				</div>
+
+				<div class="col-md-2 clearfix" style="position:relative; left: 38%;">
+					<ul class="login-cart">
+						<li>
+							<a style="border: none; background-color: white;"  href="{% url 'listagent' %}">
+									<span style="position:relative; left:10%;">
+									{% bs_icon 'arrow-repeat' color='blue' size='1.5em' %}
+									</span>
+										<br>
+									<span style="font-size:medium; color:black;">Actualiser</span>
+
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-md-2 clearfix" style="position:relative; left: 35%;">
+					<ul class="login-cart">
+						<li>
+							<button data-toggle="modal" style="border: none; background-color: white;" data-target="#myAgent" href="#">
+
+									{% bs_icon 'plus-circle' color='blue' size='1.5em' %}
+										<br>
+									<span style="font-size:medium;">
+										Ajouter
+									</span>
+
+
+							</button>
+						</li>
+					</ul>
+				</div>
+		</div>	<!-- End Of /.Container -->
+
+
+	<!-- MODAL Start
+    	================================================== -->
+
+		<div class="modal fade" id="myAgent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+		    	<div class="modal-content">
+		    		<div class="modal-header">
+		        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        		<h4 class="modal-title" id="myModalLabel" style="text-align: center;">Information Agent</h4>
+		      		</div>
+			      	<div class="modal-body clearfix">
+						<div class="form-group">
+			      		<form action="saveAgent" method="POST" id="login_form" class="std" style="width:100%;">
+							<fieldset>
+								<h3 style="tex-align:center;">Formulaire D'identification</h3>
+								<div class="form_content clearfix">
+										{% csrf_token %}
+
+										{% bootstrap_form form %}
+
+									<div>
+										{% buttons %}
+											<button type="submit" class="btn btn-primary">
+											  Submit
+											</button>
+
+											<button class="btn btn-danger" data-dismiss="modal">
+												Annuler
+											</button>
+										{% endbuttons %}
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						</div>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+			      	</div>
+		    	</div>
+		  	</div>
+		</div>
+
+		<div class="modal fade" id="myAgentUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+		    	<div class="modal-content">
+		    		<div class="modal-header">
+		        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        		<h4 class="modal-title" id="myModalLabel" style="text-align: center;">Information Agent</h4>
+		      		</div>
+			      	<div class="modal-body clearfix">
+						<div class="form-group">
+			      		<form action="updateagent" method="POST" id="login_form" class="std" style="width:100%;">
+							<fieldset>
+								<h3 style="tex-align:center;">Formulaire D'identification</h3>
+								<div class="form_content clearfix">
+										{% csrf_token %}
+
+										{% bootstrap_form form %}
+
+									<div>
+										{% buttons %}
+											<button type="submit" class="btn btn-primary">
+											  Submit
+											</button>
+
+											<button class="btn btn-danger" data-dismiss="modal">
+												Annuler
+											</button>
+										{% endbuttons %}
+									</div>
+								</div>
+							</fieldset>
+						</form>
+						</div>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+			      	</div>
+		    	</div>
+		  	</div>
+		</div>
+</section>  <!-- End of /Section -->
+
+
+	<h1 style="text-align:center; font-weigth: bold;">Information Agent De la Direction {{ agent.direction }}</h1>
+	<div>
+
+		<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th class="th-sm">Prénom</th>
+      <th class="th-sm">Nom</th>
+      <th class="th-sm">Email Professionnel</th>
+      <th class="th-sm">Sexe</th>
+      <th class="th-sm">Téléphone</th>
+      <th class="th-sm">Poste Occupé</th>
+		<th class="th-sm">Actions</th>
+
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>{{ agent.first_name }}</td>
+        <td>{{ agent.last_name }}</td>
+        <td>{{ agent.email_institutionnel }}</td>
+        <td>
+			{% if agent.sexe == "m" %}
+				<p>Masculin</p>
+			{% elif agent.sexe == "f" %}
+				<p>Féminin</p>
+			{% endif %}
+		</td>
+        <td>{{ agent.tel1 }}</td>
+        <td>{{ agent.post_occupe }}</td>
+		  <td>
+			   <button style="border: none;" id="updateButtonAttribution" >
+												{% bs_icon 'ticket-detailed' color='violet' size='1.5em' %}
+					  </button>
+
+			  <button style="border: none;" type="button" id="updateButtonModifier">
+									{% bs_icon 'pencil-square' color='blue' size='1.5em' %}
+			  </button>
+
+			  <button style="border: none;" type="button" id="updateButtonSupprimer" >
+									{% bs_icon 'trash-fill' color='red' size='1.5em' %}
+			  </button>
+
+
+		  </td>
+      </tr>
+  </tbody>
+  <tfoot>
+
+  </tfoot>
+</table>
+	</div>
+
+
+
+<h1 style="text-align:center; font-weigth: bold;">Journal Attribution</h1>
+	<div>
+
+		<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+		  <thead>
+			<tr>
+			  <th class="th-sm">Date Attribution</th>
+			  <th class="th-sm">Date Rendez-vous</th>
+			  <th class="th-sm">Nombre de Ticket</th>
+				<th class="th-sm">Actions</th>
+
+			</tr>
+		  </thead>
+		  <tbody>
+			{% for a in attribution %}
+			  <tr>
+				<td>{{ a.current_date }}</td>
+				<td>{{ a.date_rendez_vous }}</td>
+				<td>{{ a.nbr_ticket }}</td>
+
+
+				  <td>
+
+
+
+					  <button style="border: none;" type="button" id="updateButtonModifier">
+											{% bs_icon 'pencil-square' color='blue' size='1.5em' %}
+					  </button>
+
+
+					  <button style="border: none;" type="button" id="updateButtonSupprimer" >
+											{% bs_icon 'trash-fill' color='red' size='1.5em' %}
+					  </button>
+
+
+				  </td>
+			  </tr>
+		  {% endfor %}
+		  </tbody>
+		  <tfoot>
+
+		  </tfoot>
+		</table>
+	</div>
+
+
+</div>
+
+{% endblock content %}
+

@@ -1,0 +1,114 @@
+{% load static %}
+{% load bootstrap_icons %}
+<!-- TOP HEADER Start
+    ================================================== -->
+
+	<section id="top">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7">
+					<p class="contact-action"><i class="fa fa-phone-square"></i>Pour plus d'information contacter: <strong>+221 292 90 54</strong></p>
+				</div>
+				<div class="col-md-2">
+
+				</div>
+
+				<div class="col-md-3 clearfix">
+					<ul class="login-cart">
+						<li>
+							<a data-toggle="modal" data-target="#myModal" href="#">
+							{% bs_icon 'person-circle' color='white' size='1.5em' %}
+								<span style="font-size:large; position:relative; bottom:30%;">
+									deconnxion
+								</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+
+			</div> <!-- End Of /.row -->
+		</div>	<!-- End Of /.Container -->
+
+
+	<!-- MODAL Start
+    	================================================== -->
+
+	</section>  <!-- End of /Section -->
+
+
+
+	<!-- LOGO Start
+    ================================================== -->
+
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<a href="">
+						<img src="{% static 'images/logo.png' %}" alt="logo">
+					</a>
+				</div>	<!-- End of /.col-md-12 -->
+			</div>	<!-- End of /.row -->
+		</div>	<!-- End of /.container -->
+	</header> <!-- End of /Header -->
+
+
+
+
+	<!-- MENU Start
+    ================================================== -->
+
+	<nav class="navbar navbar-default">
+		<div class="container">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		    </div> <!-- End of /.navbar-header -->
+
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      	<ul class="nav navbar-nav nav-main">
+		        	<li class="active"><a href="/">ACCUEIL</a></li>
+					<li><a href="{% url 'list-comptable' %}">COMPTABLES</a></li>
+					<li><a href="personnels">AGENT</a></li>
+					<li><a href="blog.html">ATTRIBUTION</a></li>
+					<li class="dropdown">
+						<a href="#">
+							DIRECTIONS
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+						   <li><a  href="#">DAGE</a></li>
+						    <li><a  href="#">DFPT</a></li>
+							<li><a  href="#">PEJA</a></li>
+						</ul>
+					</li> <!-- End of /.dropdown -->
+
+					<li class="dropdown">
+						<a href="#">
+							CELLULES
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+						    <li><a  href="#">Informatique</a></li>
+						    <li><a  href="#">Genre</a></li>
+						</ul>
+					</li> <!-- End of /.dropdown -->
+
+					<li class="dropdown">
+						<a href="#">
+							{% bs_icon 'person-circle' color='black' size='1.5em' %}
+						</a>
+						<ul class="dropdown-menu">
+						    <li><a  href="#">Profil</a></li>
+							<li><a  href="#">Deconnexion</a></li>
+						</ul>
+					</li> <!-- End of /.dropdown -->
+
+		        </ul> <!-- End of /.nav-main -->
+		    </div>	<!-- /.navbar-collapse -->
+		</div>	<!-- /.container-fluid -->
+	</nav>	<!-- End of /.nav -->
