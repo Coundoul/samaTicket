@@ -19,18 +19,11 @@ from django.urls import include
 
 from agents.views import listagent, saveagent, updateagent, rechercheragent, liste_attribution_agent, list_comptable, \
     connexionuser, index_base
+
 from gestionTicket.views import index
 
 urlpatterns = [
     path('', index, name='index'),
-    path('accueil', index_base, name='accueil_base'),
-    path('personnels', listagent, name='listagent'),
-    path('saveAgent', saveagent, name='saveagent'),
-    path('connexion', connexionuser, name='connexionuser'),
-    path('personnels/<int:pk>', updateagent, name='updateAgent'),
-    path('personnels/journal/<int:pk>', liste_attribution_agent, name='journal'),
-    path('rechercher', rechercheragent, name='rechercheragent'),
     path('administration/', admin.site.urls),
-    path('agents/', include('agents.urls')),
-    path('comptables', list_comptable, name='list-comptable'),
+    path('mefpai/', include('agents.urls'))
 ]

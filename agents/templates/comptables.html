@@ -1,4 +1,4 @@
-{% extends "layout/index.html" %}
+{% extends "layout/baseIndex.html" %}
 {% load static %}
 {% load bootstrap5 %}
 {% load bootstrap_icons %}
@@ -11,7 +11,7 @@
 			<div class="row">
 				<br>
 				<div class="col-md-4">
-					<form action="rechercher" method="POST" class="std" style="width:100%;">
+					<form action="{% url 'mefpai:rechercher_comptable' %}" method="POST" class="std" style="width:100%;">
 						{% csrf_token %}
 						<div class="search-box">
 							<div class="input-group">
@@ -29,7 +29,7 @@
 				<div class="col-md-2 clearfix" style="position:relative; left: 38%;">
 					<ul class="login-cart">
 						<li>
-							<a style="border: none; background-color: white;"  href="/personnels">
+							<a style="border: none; background-color: white;"  href="{% url 'mefpai:list-comptable' %}">
 									<span style="position:relative; left:10%;">
 									{% bs_icon 'arrow-repeat' color='blue' size='1.5em' %}
 									</span>
@@ -68,7 +68,7 @@
 		    	<div class="modal-content">
 		    		<div class="modal-header">
 		        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        		<h4 class="modal-title" id="myModalLabel" style="text-align: center;">Information Agent</h4>
+		        		<h4 class="modal-title" id="myModalLabel" style="text-align: center;">Information Comptable</h4>
 		      		</div>
 			      	<div class="modal-body clearfix">
 						<div class="form-group">
@@ -144,7 +144,7 @@
 		</div>
 </section>  <!-- End of /Section -->
 
-	<h1 style="text-align:center; font-weigth: bold;">Liste des Comptables Du MEFPAI</h1>
+	<h1 style="text-align:center; font-weigth: bold;">Liste des Comptables du MEFPAI</h1>
 	<div>
 
 		<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
@@ -153,11 +153,11 @@
       <th class="th-sm">Prénom</th>
       <th class="th-sm">Nom</th>
       <th class="th-sm">Email Professionnel</th>
-      <th class="th-sm">Sexe</th>
-      <th class="th-sm">Téléphone</th>
+		<th class="th-sm">Role</th>
 		<th class="th-sm">Direction</th>
+      <th class="th-sm">Téléphone</th>
       <th class="th-sm">Poste Occupé</th>
-		<th class="th-sm">Actions</th>
+		<th class="th-sm">Etat Compte && Actions</th>
 
     </tr>
   </thead>
@@ -167,29 +167,41 @@
         <td>{{ a.first_name }}</td>
         <td>{{ a.last_name }}</td>
         <td>{{ a.email_institutionnel }}</td>
-        <td>
-			{% if a.sexe == "m" %}
-				<p>Masculin</p>
-			{% elif a.sexe == "f" %}
-				<p>Féminin</p>
+		  <td>
+			  {% if a.role == "CP" %}
+				<p>Comptable Principale</p>
+			{% elif a.role == "CS" %}
+				<p>Comptable Secondaire</p>
 			{% endif %}
-		</td>
+		  </td>
+		   <td>{{ a.direction }}</td>
         <td>{{ a.tel1 }}</td>
-		  <td>{{ a.direction }}</td>
         <td>{{ a.post_occupe }}</td>
 		  <td>
-
-			  <button style="border: none;" type="button" id="updateButtonModifier" onclick="update_agent_modal('{% url 'updateAgent' a.pk %}')">
+			  {% if a.is_active == 1 %}
+			  <a href="{% url 'mefpai:active_compte' a.pk %}">
+				   <button style="border: none;" type="button" >
+										<span>{% bs_icon 'unlock-fill'  size='1.5em' %}</span>
+				  </button>
+			  </a>
+			{% elif a.is_active == 0 %}
+				  <a href="{% url 'mefpai:active_compte' a.pk %}">
+					<button style="border: none;" type="button">
+										<span>{% bs_icon 'lock-fill'  size='1.5em' %}</span>
+					</button>
+				  </a>
+			{% endif %}
+			  <button style="border: none;" type="button" id="updateButtonModifier" onclick="update_agent_modal('{% url 'mefpai:updateAgent' a.pk %}')">
 									{% bs_icon 'pencil-square' color='blue' size='1.5em' %}
 			  </button>
 
-			   <a href="{% url 'journal' a.pk %}">
+			   <a href="{% url 'mefpai:journal' a.pk %}">
 				  <button style="border: none;" type="button" id="updateButtonAttribution" >
 										{% bs_icon 'journals' color='orange' size='1.5em' %}
 				  </button>
 			   </a>
 
-			  <button style="border: none;" type="button" id="updateButtonSupprimer" onclick="updateAgentModal('{% url 'updateAgent' a.pk %}')">
+			  <button style="border: none;" type="button" id="updateButtonSupprimer" onclick="updateAgentModal('{% url 'mefpai:updateAgent' a.pk %}')">
 									{% bs_icon 'trash-fill' color='red' size='1.5em' %}
 			  </button>
 

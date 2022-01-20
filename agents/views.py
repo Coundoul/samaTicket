@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 # Create your views here.
-from agents.forms import AgentsForms
+from agents.forms import AgentsForms, UtilisateurForms
 from agents.models import Agents
 from django.http import JsonResponse
 
@@ -50,6 +50,19 @@ def updateagent(request, pk):
     return render(request, 'agent.html', {'agent': agent, 'form': form})
 
 
+def active_compte(request, pk):
+    if pk != '':
+        utilisateur = Utilisateur.objects.get(utilisateur_id=pk)
+        if utilisateur.is_active:
+            utilisateur.is_active = False
+            utilisateur.save()
+            return HttpResponseRedirect('/mefpai/comptables')
+        elif not utilisateur.is_active:
+            utilisateur.is_active = True
+            utilisateur.save()
+            return HttpResponseRedirect('/mefpai/comptables')
+
+
 def rechercheragent(request):
     form = AgentsForms()
     try:
@@ -61,8 +74,21 @@ def rechercheragent(request):
     except:
         agent = ''
         return render(request, 'rechercher.html', {'agent': agent, 'form': form, 'email': email})
-
     return HttpResponseRedirect('personnels')
+
+
+def rechercher_comptable(request):
+    form = UtilisateurForms()
+    try:
+        if request.method == 'POST':
+            email = request.POST['emailagent']
+            agent = Utilisateur.objects.get(email_institutionnel=email)
+            nbr = 1
+            return render(request, 'recherchercomptable.html', {'agent': agent, 'form': form, 'nbr': nbr, 'email': email})
+    except:
+        agent = ''
+        return render(request, 'recherchercomptable.html', {'agent': agent, 'form': form, 'email': email})
+    return HttpResponseRedirect('/mefpai/comptables')
 
 
 def liste_attribution_agent(request, pk):
@@ -75,8 +101,8 @@ def liste_attribution_agent(request, pk):
 
 
 def list_comptable(request):
-    form = AgentsForms()
-    comptables = Utilisateur.objects.filter(role='CS')
+    form = UtilisateurForms()
+    comptables = Utilisateur.objects.all()
     return render(request, 'comptables.html', {'comptables': comptables, 'form': form})
 
 
@@ -87,7 +113,18 @@ def deleteagent(request, pk):
 
 
 def connexionuser(request):
-    return render(request, 'base.html')
+    form = AgentsForms()
+    try:
+        if request.method == 'POST':
+            email = request.POST['email']
+            passwd = request.POST['passwd']
+            user = Utilisateur.objects.get(email_institutionnel=email, password=passwd)
+            agent = Agents.objects.all()
+            return render(request, 'base.html', {'agent': agent, 'form': form, 'user': user})
+        return HttpResponseRedirect('/')
+    except:
+        return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/')
 
 
 def logout_view(request):

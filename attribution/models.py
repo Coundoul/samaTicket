@@ -12,5 +12,5 @@ class Attribution(models.Model):
     nbr_ticket = models.IntegerField(verbose_name='Nombre de Tickets Recus :', blank=False)
     current_date = models.DateTimeField(verbose_name='Date Attribution', default=datetime.today(), blank=True)
     date_rendez_vous = models.DateTimeField(verbose_name='Date Rendez-vous', blank=False)
-    agent = models.ForeignKey(Agents, verbose_name="Agents", on_delete=models.CASCADE, blank=False)
+    agent = models.ForeignKey(Agents, verbose_name="Agents", on_delete=models.CASCADE, blank=True)
     utilisateur_at_ref = models.ForeignKey(Utilisateur, verbose_name="Utilisateur", blank=False, on_delete=models.CASCADE)

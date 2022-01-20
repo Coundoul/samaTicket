@@ -1,4 +1,4 @@
-{% extends "layout/index.html" %}
+{% extends "layout/baseIndex.html" %}
 {% load static %}
 {% load bootstrap5 %}
 {% load bootstrap_icons %}
@@ -29,7 +29,7 @@
 				<div class="col-md-2 clearfix" style="position:relative; left: 38%;">
 					<ul class="login-cart">
 						<li>
-							<a style="border: none; background-color: white;"  href="{% url 'listagent' %}">
+							<a style="border: none; background-color: white;"  href="{% url 'mefpai:list-agent' %}">
 									<span style="position:relative; left:10%;">
 									{% bs_icon 'arrow-repeat' color='blue' size='1.5em' %}
 									</span>

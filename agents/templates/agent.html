@@ -1,4 +1,4 @@
-{% extends "layout/index.html" %}
+{% extends "layout/baseIndex.html" %}
 {% load static %}
 {% load bootstrap5 %}
 {% load bootstrap_icons %}
@@ -29,7 +29,7 @@
 				<div class="col-md-2 clearfix" style="position:relative; left: 38%;">
 					<ul class="login-cart">
 						<li>
-							<a style="border: none; background-color: white;"  href="/personnels">
+							<a style="border: none; background-color: white;"  href="{% url 'mefpai:list-agent' %}">
 									<span style="position:relative; left:10%;">
 									{% bs_icon 'arrow-repeat' color='blue' size='1.5em' %}
 									</span>
@@ -179,17 +179,17 @@
         <td>{{ a.post_occupe }}</td>
 		  <td>
 
-			  <button style="border: none;" type="button" id="updateButtonModifier" onclick="update_agent_modal('{% url 'updateAgent' a.pk %}')">
+			  <button style="border: none;" type="button" id="updateButtonModifier" onclick="update_agent_modal('{% url 'mefpai:updateAgent' a.pk %}')">
 									{% bs_icon 'pencil-square' color='blue' size='1.5em' %}
 			  </button>
 
-			   <a href="{% url 'journal' a.pk %}">
+			   <a href="{% url 'mefpai:journal' a.pk %}">
 				  <button style="border: none;" type="button" id="updateButtonAttribution" >
 										{% bs_icon 'journals' color='orange' size='1.5em' %}
 				  </button>
 			   </a>
 
-			  <button style="border: none;" type="button" id="updateButtonSupprimer" onclick="updateAgentModal('{% url 'updateAgent' a.pk %}')">
+			  <button style="border: none;" type="button" id="updateButtonSupprimer" onclick="updateAgentModal('{% url 'mefpai:updateAgent' a.pk %}')">
 									{% bs_icon 'trash-fill' color='red' size='1.5em' %}
 			  </button>
 

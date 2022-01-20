@@ -17,9 +17,8 @@
 					<ul class="login-cart">
 						<li>
 							<a data-toggle="modal" data-target="#myModal" href="#">
-							{% bs_icon 'person-circle' color='white' size='1.5em' %}
 								<span style="font-size:large; position:relative; bottom:30%;">
-									deconnxion
+									Déconnexion
 								</span>
 							</a>
 						</li>
@@ -71,10 +70,10 @@
 
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      	<ul class="nav navbar-nav nav-main">
-		        	<li class="active"><a href="/">ACCUEIL</a></li>
-					<li><a href="{% url 'list-comptable' %}">COMPTABLES</a></li>
-					<li><a href="personnels">AGENT</a></li>
-					<li><a href="blog.html">ATTRIBUTION</a></li>
+		        	<li class="active"><a href="{% url 'mefpai:accueil' %}">ACCUEIL</a></li>
+					<li><a href="{% url 'mefpai:list-comptable' %}">COMPTABLES</a></li>
+					<li><a href="{% url 'mefpai:list-agent' %}">AGENT</a></li>
+					<li><a href="">ATTRIBUTION</a></li>
 					<li class="dropdown">
 						<a href="#">
 							DIRECTIONS
@@ -104,7 +103,7 @@
 						</a>
 						<ul class="dropdown-menu">
 						    <li><a  href="#">Profil</a></li>
-							<li><a  href="#">Deconnexion</a></li>
+							<li><a  href="#">Déconnexion</a></li>
 						</ul>
 					</li> <!-- End of /.dropdown -->
 

@@ -41,18 +41,18 @@
 		        		<h4 class="modal-title" id="myModalLabel" style="text-align: center;">Portail d'Authentification</h4>
 		      		</div>
 			      	<div class="modal-body clearfix">
-			      		<form action="{% url 'connexionuser' %}" method="POST" id="login_form" class="std" style="width:100%;">
+			      		<form action="agents/login"  method="POST" id="login_form" class="std" style="width:100%;">
 							{% csrf_token %}
 							<fieldset>
 								<h3>Se connecter</h3>
 								<div class="form_content clearfix">
 									<p class="text">
 									<label for="email">E-mail address</label>
-										<span><input placeholder="Adresse mail" type="text" id="email" name="email" class="account_input" required="required"></span>
+										<span><input placeholder="Entrer votre adresse" type="text" id="email" name="email" class="account_input" required="required"></span>
 									</p>
 									<p class="text">
 									<label for="passwd">Password</label>
-										<span><input placeholder="mot de Passe" type="password" id="passwd" name="passwd" class="account_input" required="required"></span>
+										<span><input placeholder="Entrer votre mot de passe" type="password" id="passwd" name="passwd" class="account_input" required="required"></span>
 									</p>
 									<p class="lost_password">
 										<a href="#popab-password-reset" class="popab-password-link">Avez vous oublié votre mot de passe?</a>
@@ -109,42 +109,7 @@
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      	<ul class="nav navbar-nav nav-main">
 		        	<li class="active"><a href="/">ACCUEIL</a></li>
-<!--					<li><a href="{% url 'list-comptable' %}">COMPTABLES</a></li>-->
-<!--					<li><a href="personnels">AGENT</a></li>-->
-<!--					<li><a href="blog.html">ATTRIBUTION</a></li>-->
-<!--					<li class="dropdown">-->
-<!--						<a href="#">-->
-<!--							DIRECTIONS-->
-<!--							<span class="caret"></span>-->
-<!--						</a>-->
-<!--						<ul class="dropdown-menu">-->
-<!--						   <li><a  href="#">DAGE</a></li>-->
-<!--						    <li><a  href="#">DFPT</a></li>-->
-<!--							<li><a  href="#">PEJA</a></li>-->
-<!--						</ul>-->
-<!--					</li> &lt;!&ndash; End of /.dropdown &ndash;&gt;-->
-
-<!--					<li class="dropdown">-->
-<!--						<a href="#">-->
-<!--							CELLULES-->
-<!--							<span class="caret"></span>-->
-<!--						</a>-->
-<!--						<ul class="dropdown-menu">-->
-<!--						    <li><a  href="#">Informatique</a></li>-->
-<!--						    <li><a  href="#">Genre</a></li>-->
-<!--						</ul>-->
-<!--					</li> &lt;!&ndash; End of /.dropdown &ndash;&gt;-->
-
-<!--					<li class="dropdown">-->
-<!--						<a href="#">-->
-<!--							{% bs_icon 'person-circle' color='black' size='1.5em' %}-->
-<!--						</a>-->
-<!--						<ul class="dropdown-menu">-->
-<!--						    <li><a  href="#">Profil</a></li>-->
-<!--							<li><a  href="#">Deconnexion</a></li>-->
-<!--						</ul>-->
-<!--					</li> &lt;!&ndash; End of /.dropdown &ndash;&gt;-->
-
+					<li><a href="/">PUBLICATION</a></li>
 		        </ul> <!-- End of /.nav-main -->
 		    </div>	<!-- /.navbar-collapse -->
 		</div>	<!-- /.container-fluid -->
